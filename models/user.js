@@ -47,8 +47,7 @@ const userSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
-//Before sending to database
-//Creates encrypted Password
+//Before saving user to database. Create encrypted Password
 userSchema.pre('save',function(next){ //ES5 Function
 	var user = this;
 
@@ -66,17 +65,16 @@ userSchema.pre('save',function(next){ //ES5 Function
 	}
 })
 
-// userSchema.post('save', function() {
-//   console.log('this gets printed second');
-// });
-
-//Create new method for the schema
 //Compares a password provided by the user with the one in the db
 userSchema.methods.comparePassword = function( candidatePassword, cb ){
 	bcrypt.compare( candidatePassword, this.password, function( err, isMatch ){
 		if(err) return cb(err);
 		cb( null, isMatch );
 	})
+}
+
+userSchema.methods.comparePasswordAsync = function (candidatePassword) {
+	return bcrypt.compare(candidatePassword, this.password)
 }
 
 userSchema.methods.genRefreshToken = function (cb) {
@@ -87,7 +85,6 @@ userSchema.methods.genRefreshToken = function (cb) {
 		config.REFRESH_TOKEN_SECRET, 
 		{ expiresIn: '1d' }
 		);
-
 
 	cleanRefreshTokens(user.refreshTokens)
 	.then(tokens =>{

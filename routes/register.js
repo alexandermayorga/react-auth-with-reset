@@ -8,14 +8,6 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 //DB Models
 const { User } = require('./../models/user');
 
-router.get('/', function (req, res, next) {
-
-    if (req.user) return res.redirect('/dashboard');
-
-    res.send('Register Page!');
-    
-});
-
 
 router.post('/', function (req, res, next) {
     if (Object.entries(req.body).length === 0) return res.status(400).end('No Info Sent for Registration')
@@ -69,8 +61,8 @@ router.post('/', function (req, res, next) {
 
 
             res
-                .cookie('refreshToken', refreshToken, { httpOnly: true, expires: new Date(Date.now() + 24 * 3600000) })
-                .cookie('accessToken', accessToken, { httpOnly: true, expires: new Date(Date.now() + (60 * 10000)) })
+                .cookie('refreshToken', refreshToken, { expires: new Date(Date.now() + 24 * 3600000) })
+                .cookie('accessToken', accessToken, { expires: new Date(Date.now() + (60 * 10000)) })
                 .status(200)
                 .end();
         })

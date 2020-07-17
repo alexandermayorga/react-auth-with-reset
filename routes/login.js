@@ -4,17 +4,10 @@ var router = express.Router();
 //DB Models
 const { User } = require('./../models/user');
 
-router.get('/', function (req, res, next) {
-
-    if (req.user) return res.redirect('/dashboard');
-
-    res.send('Login Page!');
-});
-
 router.post('/', function (req, res, next) {
     const badRequest = 'There was an error with your request. Please check your information and try again.';
 
-    if (Object.entries(req.body).length === 0 || !req.body.email) return res.status(401).end('No info was sent for Authorization')
+    if (Object.entries(req.body).length === 0 || !req.body.email) return res.status(400).send('No info was sent for Authorization')
 
     //Query the database
     User.findOne({ 'email': req.body.email }, (err, user) => {

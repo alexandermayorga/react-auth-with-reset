@@ -6,9 +6,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // Get the ROUTES
+const userRouter = require('./routes/user');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
+const authenticateRouter = require('./routes/authenticate');
 const forgotPasswordRouter = require('./routes/forgot_password');
 const resetPasswordRouter = require('./routes/reset_password');
 const dashboardRouter = require('./routes/dashboard');
@@ -30,15 +32,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 //Middleware
 const { auth } = require('./middleware/auth');
 
 // Assign the ROUTES
-app.use('/', auth, loginRouter);
+app.use('/api/user', auth, userRouter);
 app.use('/api/logout', auth, logoutRouter);
 app.use('/api/login', auth, loginRouter);
+app.use('/api/authenticate', auth, authenticateRouter);
 app.use('/api/verify-account', verifyAccountRouter);
 app.use('/api/register', auth, registerRouter);
 app.use('/api/forgot-password', auth, forgotPasswordRouter);

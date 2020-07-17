@@ -1,11 +1,10 @@
 const {User} = require('./../models/user');
 
 let auth = (req, res, next) => {
-	const accessToken = req.cookies.accessToken; //Get token 
-	const refreshToken = req.cookies.refreshToken; //Get token 
+	const accessToken = req.cookies.accessToken //Get token 
+	const refreshToken = req.cookies.refreshToken //Get token 
 	
 	if (!refreshToken) return next();
-
 
 	User.verifyAccessToken({ accessToken, refreshToken }, (err, user, accessToken) => {
 		if (err && err.name == 'TokenExpiredError'){

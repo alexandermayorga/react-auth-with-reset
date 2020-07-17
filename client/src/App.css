@@ -1,38 +1,109 @@
-.App {
-  text-align: center;
+/*======= GLOBALS =========*/
+body{
+    background-color: #DDDDDD;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/*======= BUTTONS =========*/
+.btn-primary {
+    color: #fff;
+    background-color: #7557B9;
+    border-color: #aea0cd;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #5D419C;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover{
+    color: #fff;
+    background-color: #7557B9;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/*======= TYPOGRAPHY =========*/
+.text-primary {
+    color: #5D419C;
+}
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #7557B9;
 }
 
-.App-link {
-  color: #61dafb;
+/*======= UTILS =========*/
+.centered {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.centered-form{
+    width: 340px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*======= PANELS =========*/
+.panel-primary {
+    border-color: #aea0cd;
+}
+.panel-primary>.panel-heading {
+    color: #FFF;
+    background-color: #7557B9;
+    border-color: #aea0cd;
+}
+.panel-title{
+    font-family: 'Bree Serif', serif;
+    font-size: 2.5rem;
+}
+
+
+/*======= FORMS =========*/
+.input-group-addon {
+    color: #fff;
+    background-color: #7557B9;
+    border: 1px solid #aea0cd;
+}
+
+form label.error {
+    display: table-caption;
+    color: #a94442;
+}
+
+
+/*======= DASHBOARD =========*/
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+}
+
+.brand {
+    font-size: 2rem;
+    font-family: 'Bree Serif', serif;
+}
+.brand .glyphicon {
+    margin-right: 3px;
+    font-size: 1.7rem;
+    color: #FFF;
+    background: #7556b9;
+    padding: 7px 7px 5px 6px;
+    border-radius: 4px;
+}
+.nav a .glyphicon{
+    margin-right: 5px;
+}
+
+.main {
+    padding-right: 40px;
+    padding-left: 40px;
+    padding: 20px;
 }

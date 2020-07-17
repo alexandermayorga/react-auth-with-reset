@@ -4,6 +4,9 @@ var router = express.Router();
 //DB Models
 const { User } = require('./../models/user');
 
+// @route  POST /api/logout
+// @desc Logout User, Deletes Token Cookies and Token in DB
+// @access PRIVATE
 router.post('/', function (req, res, next) {
 
     //TODO: you decide what to do after logout
@@ -17,7 +20,6 @@ router.post('/', function (req, res, next) {
             .clearCookie('accessToken')
             .clearCookie('refreshToken')
             .send("You have logged out!")
-            // .redirect('/');
     })
     
 });
