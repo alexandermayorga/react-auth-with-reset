@@ -16,6 +16,8 @@ const resetPasswordRouter = require('./routes/reset_password');
 const dashboardRouter = require('./routes/dashboard');
 const verifyAccountRouter = require('./routes/verify_account');
 
+const validateRouter = require('./routes/validate');
+
 const app = express();
 
 //DB Config
@@ -32,7 +34,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 //Middleware
@@ -48,5 +49,6 @@ app.use('/api/register', auth, registerRouter);
 app.use('/api/forgot-password', auth, forgotPasswordRouter);
 app.use('/api/reset-password', auth, resetPasswordRouter);
 app.use('/api/dashboard', auth, dashboardRouter);
+app.use('/api/validate', validateRouter);
 
 module.exports = app;
