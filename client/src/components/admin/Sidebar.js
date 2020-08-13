@@ -1,8 +1,24 @@
 import React from 'react'
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import axios from "axios";
 
-export default function Sidebar({ logout }) {
-    let { url } = useRouteMatch();
+export default function Sidebar() {
+    const history = useHistory();
+    const location = useLocation();
+
+    console.log(location)
+
+    function logout(e) {
+        e.preventDefault()
+        axios.post('/api/logout')
+            .then(res => {
+                history.push('/login')
+            })
+            .catch(err => {
+                alert("There was an error. Please try again.")
+                console.log(err.response.data)
+            })
+    }
 
     return (
         <>
@@ -13,13 +29,13 @@ export default function Sidebar({ logout }) {
             <hr />
 
             <ul className="nav nav-pills nav-stacked">
-                <li role="presentation" className="active">
+                <li role="presentation" className={`${location.pathname === "/admin" && 'active'}`}>
                     <Link to="/admin" className="text-primary">
                         <span className="glyphicon glyphicon-home" aria-hidden="true"></span> Home
                     </Link>
                 </li>
-                <li role="presentation">
-                    <Link to={`${url}/profile`} className="text-primary">
+                <li role="presentation" className={`${location.pathname === "/admin/profile" && 'active'}`}>
+                    <Link to="/admin/profile" className="text-primary">
                         <span className="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
                     </Link>
                 </li>

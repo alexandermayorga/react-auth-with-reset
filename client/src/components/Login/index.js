@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
 import axios from 'axios'
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Input from './Input';
 
-export default function Login() {
+export default function Login({auth}) {
     let history = useHistory();
-    let location = useLocation();
-    let { from } = location.state || { from: { pathname: "/admin" } };
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
@@ -21,13 +19,12 @@ export default function Login() {
         axios.post('api/login', user)
             .then(res => {
                 console.log("Login Success!")
-                localStorage.setItem("userLoggedIn","true")
-                history.replace(from);
-
+                history.push("/admin");
             })
             .catch(error => {
                 console.log("Login Error!")
-                console.log(error.response.data)
+                // console.log(error.response.data)
+                console.log(error)
             })
 
     }
